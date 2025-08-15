@@ -1,35 +1,56 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-
+import { useState, useEffect } from "react";
+import { PostComponent } from "./PostComponent";
 function App() {
-  const [count, setCount] = useState(0);
+  const [posts, setPosts] = useState([]);
 
+  useEffect(() => {
+    async function getPosts() {
+      try {
+        const response = await fetch("http://localhost:5173/api/posts", {
+          method: "GET",
+          credentials: "include", //TODO: remove
+        });
+        const response_json = await response.json();
+        console.log(response_json);
+        // setPosts(response.data);
+        const mappedPosts = response_json.map((post) => ({
+          id: String(post.id),
+          name: String(post.owner),
+          time: String(post.created_at),
+          description: String(post.body),
+          image: post.image || null,
+        }));
+
+        setPosts(mappedPosts);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getPosts();
+  }, []);
+
+  // Create an array of postComponents by mapping over the posts array and returning a PostComponent for each post
+  const postComponents = posts.map((post) => (
+    <PostComponent
+      key={post.id}
+      id={post.id}
+      name={post.name}
+      time={post.time}
+      image={post.image}
+      description={post.description}
+    />
+  ));
+
+  // return JSX that will be rendered
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div style={{ background: "#dfe6e9", minHeight: "100vh" }}>
+      {/* Display the postComponents */}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div>{postComponents}</div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   );
 }
 
+// Export the App component to use it in the other files
 export default App;
