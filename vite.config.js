@@ -12,5 +12,10 @@ export default defineConfig({
         secure: false,
       },
     },
+    allowedHosts: [
+      "ccb8f1f91e88291a03f0d3cfbd64141d.serveo.net", //
+    ],
+    host: true,
+    port: 5173,
   },
 });

@@ -4,8 +4,8 @@ const style = {
   color: "white",
   borderWidth: "1px",
   borderRadius: "30px",
-  borderTop: "solid #414040ff",
-  borderBottom: "solid #414040ff",
+  borderTop: "solid #303030ff",
+  borderBottom: "solid #303030ff",
   padding: 20,
   margin: "10px 0px",
 };
