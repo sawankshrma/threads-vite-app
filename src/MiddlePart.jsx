@@ -1,21 +1,23 @@
 import { useState, useEffect } from "react";
 import { PostComponent } from "./PostComponent";
+import "./MiddlePart.css";
 
 export function MiddlePart() {
   const [following, setFollowing] = useState(false);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0 });
   }, [following]);
 
   return (
     <div
       style={{
+        // transform: "translateX(25vw)",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         width: "100%",
-        maxWidth: "690px",
+        maxWidth: "650px",
       }}
     >
       {" "}
@@ -55,12 +57,13 @@ function Posts({ following }) {
         const response_json = await response.json();
         console.log(response_json);
         // setPosts(response.data);
+
         const mappedPosts = response_json.map((post) => ({
           id: String(post.id),
           name: String(post.owner),
           time: String(post.created_at),
           description: String(post.body),
-          image: post.image || null,
+          image: post.image_url,
         }));
 
         setPosts(mappedPosts);
@@ -98,20 +101,22 @@ function Posts({ following }) {
 
 function Buttons({ following, setFollowing }) {
   const style2 = {
-    fontWeight: following ? "600" : "500",
+    fontWeight: "600",
     color: following ? "#fff" : "#aaa",
     borderBottom: following ? "3px solid #1DA1F2" : "3px solid transparent",
     background: "transparent", // ✅ no blocky bg
-    border: "none",
-    paddingBottom: "6px",
+    paddingBottom: "10px",
   };
   const style1 = {
-    fontWeight: following ? "500" : "600", // inactive / active
+    fontWeight: "600",
     color: following ? "#aaa" : "#fff",
     borderBottom: following ? "3px solid transparent" : "3px solid #1DA1F2", // underline
     background: "transparent", // ✅ no blocky bg
-    border: "none",
-    paddingBottom: "6px",
+    paddingBottom: "10px",
+  };
+
+  const uniStyle = {
+    cursor: "pointer",
   };
 
   return (
@@ -122,19 +127,21 @@ function Buttons({ following, setFollowing }) {
         width: "100%",
         zIndex: 10, // higher than posts
         position: "sticky",
-        padding: "10px 0",
+        padding: "10px 0 0 0",
         background: "rgba(0,0,0, 0.6)",
         backdropFilter: "blur(10px)",
         top: "0px", // stick to the top of parent
       }}
     >
       <button
+        class={"top-btn"}
         style={{
           width: "50%",
           marginRight: "2%",
           marginLeft: "10%",
-
+          border: "None",
           ...style1,
+          ...uniStyle,
         }}
         onClick={() => {
           setFollowing(false);
@@ -143,11 +150,14 @@ function Buttons({ following, setFollowing }) {
         For You
       </button>{" "}
       <button
+        class={"top-btn"}
         style={{
           width: "50%",
           marginRight: "10%",
           marginLeft: "2%",
+          border: "None",
           ...style2,
+          ...uniStyle,
         }}
         onClick={() => {
           setFollowing(true);
