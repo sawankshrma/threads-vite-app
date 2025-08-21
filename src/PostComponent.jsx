@@ -1,5 +1,6 @@
 // Create a style object to apply styles to the div element in PostComponent
 import "./PostComponent.css";
+import profileImg from "./assets/836.jpg";
 import { useState, useEffect } from "react";
 
 const style = {
@@ -17,12 +18,10 @@ const style = {
 
 export function PostComponent({ id, name, time, image, description }) {
   // console.log(timeAgo(time, Date.now()));
-  console.log(`image is = ${String(image)}`);
+
   const timed = timeAgo(time);
 
-  const [profileUrl, setProfileUrl] = useState(
-    "https://imgs.search.brave.com/ZACv93qZO57A2RrexnAjJi9CTpejuyu2aIGeB9-2beA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvMTk0/OTM2My5qcGc"
-  );
+  const [profileUrl, setProfileUrl] = useState({ profileImg });
 
   useEffect(() => {
     async function getUser() {
@@ -35,9 +34,12 @@ export function PostComponent({ id, name, time, image, description }) {
           credentials: "include", //TODO: remove
         });
         const response_json = await response.json();
-        console.log(response_json);
+        // console.log(response_json);
         const owner = response_json;
-        setProfileUrl(`${owner.profile_pic_url}`);
+        const url = owner.profile_pic_url;
+        if (url !== "") setProfileUrl(`${owner.profile_pic_url}`);
+        else setProfileUrl(profileImg);
+        // console.log(`${name} is = ${owner.profile_pic_url}`);
       } catch (error) {
         console.error(error);
       }
@@ -68,7 +70,9 @@ export function PostComponent({ id, name, time, image, description }) {
         >
           {description}
         </div>
-        <img src={image} alt="xyz" className="post-image" />
+        {image !== "" && image !== undefined ? (
+          <img src={image} alt="xyz" className="post-image" />
+        ) : null}
       </div>
     </div>
   );

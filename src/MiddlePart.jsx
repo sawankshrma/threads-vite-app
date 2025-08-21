@@ -4,6 +4,7 @@ import "./MiddlePart.css";
 
 export function MiddlePart() {
   const [following, setFollowing] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -34,16 +35,21 @@ export function MiddlePart() {
           //   position: "absolute",
         }}
       >
-        <Posts following={following} />
+        <Posts
+          following={following}
+          loading={loading}
+          setLoading={setLoading}
+        />
       </div>
     </div>
   );
 }
 
-function Posts({ following }) {
+function Posts({ following, loading, setLoading }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     async function getPosts() {
       try {
         const response = await fetch("http://localhost:5173/api/posts", {
@@ -69,8 +75,11 @@ function Posts({ following }) {
         setPosts(mappedPosts);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     }
+
     getPosts();
   }, [following]);
 
@@ -85,7 +94,9 @@ function Posts({ following }) {
     />
   ));
 
-  return (
+  return loading ? (
+    <div style={{ color: "white", marginLeft: "50%" }}>loading...</div>
+  ) : (
     <div
       style={{
         display: "flex",
