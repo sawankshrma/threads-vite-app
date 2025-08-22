@@ -1,5 +1,7 @@
 import { MiddlePart } from "./MiddlePart";
 import { Sidebar } from "./Sidebar";
+import { Logo, CreateButton } from "./Logo";
+
 function App() {
   return (
     <div
@@ -9,6 +11,8 @@ function App() {
         justifyContent: "center",
       }}
     >
+      <Logo />
+      <CreateButton />
       <Sidebar />
       <MiddlePart />
     </div>

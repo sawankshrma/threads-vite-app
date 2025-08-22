@@ -1,61 +1,51 @@
 import { useState, useEffect } from "react";
-import logo from "./assets/twitter.png";
-import search from "./assets/search.png";
+import { Home, Search, Plus, Heart, User } from "lucide-react";
+import "./Sidebar.css";
 
 export function Sidebar() {
-  const [logo1, setLogo1] = useState("");
-  const [search1, setSearch1] = useState("");
-
-  useEffect(() => {
-    setLogo1(logo);
-    setSearch1(search);
-  }, []);
-
   return (
-    <div
-      style={{
-        background: "rgba(0,0,0, 0.6)",
-        backdropFilter: "blur(1px)",
-        border: "solid 1px #191919ff",
-        borderRadius: "10px",
-        height: "98vh",
-        width: "90px",
-        zIndex: 9,
-        position: "fixed",
-        left: "1vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <div className="logo" style={{}}>
-        <img
-          src={logo1}
-          style={{
-            width: "60%",
-            marginLeft: "20%",
-            marginTop: "10px",
-          }}
-          alt="Twitter logo"
-        />
-      </div>
-      <div
-        className="controls"
-        style={{ backgroundColor: "green !important" }}
-      ></div>
-      <img
-        src={search1}
-        style={{ width: "50%", marginLeft: "25%" }}
-        alt="search"
+    <div className=" side-bar flex flex-col items-center space-y-6 bg-black h-screen py-6 ">
+      {/* Home (active) */}
+      <Home
+        className="text-white w-6 h-6"
+        color="white"
+        size={32}
+        strokeWidth={1.5}
       />
-      <div className="options" style={{}}>
-        <img
-          src={search1}
-          style={{ width: "50%", marginLeft: "25%" }}
-          alt="search"
+
+      {/* Search */}
+      <Search
+        className="text-gray-500 w-6 h-6"
+        color="white"
+        size={32}
+        strokeWidth={1.5}
+      />
+
+      {/* Plus Button */}
+      <div className="plus-bg bg-gray-800 p-3 rounded-xl flex items-center justify-center">
+        <Plus
+          className="text-white w-100 h-100"
+          color="white"
+          size={45}
+          strokeWidth={2}
         />
       </div>
+
+      {/* Heart */}
+      <Heart
+        className="text-gray-500 w-6 h-6"
+        color="white"
+        size={32}
+        strokeWidth={1.5}
+      />
+
+      {/* User */}
+      <User
+        className="text-gray-500 w-6 h-6"
+        color="white"
+        size={32}
+        strokeWidth={1.5}
+      />
     </div>
   );
 }
