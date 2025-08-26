@@ -1,0 +1,9 @@
+.top-btn:hover {
+  color: #96b0b3 !important;
+  transform: scale(1.1);
+}
+
+.top-btn {
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}

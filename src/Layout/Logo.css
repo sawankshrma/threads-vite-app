@@ -1,6 +1,5 @@
 .plus-bg1 {
   background-color: #1f1f1f;
-  width: 85%;
   border-radius: 15%;
   border: solid 1px rgb(81, 81, 81);
   aspect-ratio: 1 / 1;
@@ -11,7 +10,19 @@
   position: fixed;
   right: 3vh;
   bottom: 3vh;
-  width: 100px;
+  width: 80px;
+  transition: transform 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.logo {
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.plus-bg1:hover,
+.logo:hover {
+  transform: scale(1.1);
 }
 
 @media (max-width: 750px) {
@@ -21,4 +32,9 @@
   .logo {
     display: none;
   }
+}
+
+.logo:active,
+.plus-bg1:active {
+  transform: scale(0.9);
 }

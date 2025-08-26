@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import logo from "./assets/twitter.png";
+import logo from "../assets/twitter.png";
 import { Plus } from "lucide-react";
 import "./Logo.css";
+import { Link } from "react-router-dom";
 
 const divStyle = {
   zIndex: "11",
@@ -20,7 +21,9 @@ export function Logo() {
 
   return (
     <div style={divStyle} className="logo">
-      <img src={logo1} style={{ width: "100%" }}></img>
+      <Link to="/">
+        <img src={logo1} style={{ width: "100%" }}></img>
+      </Link>
     </div>
   );
 }

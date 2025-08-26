@@ -1,15 +1,16 @@
 // Create a style object to apply styles to the div element in PostComponent
 import "./PostComponent.css";
-import profileImg from "./assets/836.jpg";
+import profileImg from "../assets/836.jpg";
 import { useState, useEffect } from "react";
 
 const style = {
-  backgroundColor: "#181818",
+  backgroundColor: "#0e0e0eff",
   color: "white",
   borderWidth: "1px",
-  borderRadius: "30px",
-  borderTop: "solid #3d3d3dff",
-  borderBottom: "solid #3d3d3dff",
+  borderRadius: "20px",
+  borderTop: "solid #2b2b2bff ",
+  borderBottom: "solid #2b2b2bff",
+
   padding: 20,
   margin: "10px 0px",
   display: "flex",

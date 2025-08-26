@@ -18,6 +18,8 @@
 }
 
 .plus-bg {
+  transition: transform 0.15s ease-in-out;
+  cursor: pointer;
   background-color: #1f1f1f;
   width: 85%;
   border-radius: 15%;
@@ -26,6 +28,19 @@
   border: solid 1px rgb(54, 54, 54);
   align-items: center;
   justify-content: center;
+}
+
+.options {
+  transition: transform 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.options:hover {
+  transform: scale(1.35);
+}
+
+.plus-bg:hover {
+  transform: scale(1.2) !important;
 }
 
 @media (max-height: 500px) {
@@ -40,7 +55,7 @@
     flex-direction: row;
     width: 90vw;
     height: 50px !important;
-    bottom: 2vh;
+    bottom: 1vh;
     top: auto;
     left: 5vw;
   }
@@ -49,4 +64,9 @@
     aspect-ratio: 1 / 1 !important;
     width: auto;
   }
+}
+
+.options:active,
+.plus-bg:active {
+  transform: scale(0.9);
 }
