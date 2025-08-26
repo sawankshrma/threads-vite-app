@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { PostComponent } from "./PostComponent";
 import "./MiddlePart.css";
+// import { CreateFollowingContext } from "../App";
 
 export function MiddlePart() {
   const [following, setFollowing] = useState(false);
@@ -61,7 +62,6 @@ function Posts({ following, loading, setLoading }) {
           credentials: "include", //TODO: remove
         });
         const response_json = await response.json();
-        console.log(response_json);
         // setPosts(response.data);
 
         const mappedPosts = response_json.map((post) => ({
