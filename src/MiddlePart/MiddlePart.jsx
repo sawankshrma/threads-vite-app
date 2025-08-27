@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { PostComponent } from "./PostComponent";
 import "./MiddlePart.css";
-// import { CreateFollowingContext } from "../App";
+import { GlobalContext } from "../App";
 
 export function MiddlePart() {
   const [following, setFollowing] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const { loading, setLoading } = useContext(GlobalContext);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -64,16 +64,19 @@ function Posts({ following, loading, setLoading }) {
         const response_json = await response.json();
         // setPosts(response.data);
 
+        function to_arr(s) {
+          return s.split("\n");
+        }
+
         const mappedPosts = response_json.map((post) => ({
           id: String(post.id),
           name: String(post.owner),
           time: String(post.created_at),
-          description: String(post.body),
+          description: to_arr(post.body),
           image: post.image_url,
         }));
 
-        console.log();
-
+        // console.log(mappedPosts);
         setPosts(mappedPosts);
       } catch (error) {
         console.error(error);
@@ -96,9 +99,7 @@ function Posts({ following, loading, setLoading }) {
     />
   ));
 
-  return loading ? (
-    <div style={{ color: "white", marginLeft: "50%" }}>loading...</div>
-  ) : (
+  return loading ? null : (
     <div
       style={{
         display: "flex",
@@ -147,7 +148,7 @@ function Buttons({ following, setFollowing }) {
       }}
     >
       <button
-        class={"top-btn"}
+        className={"top-btn"}
         style={{
           width: "50%",
           marginRight: "2%",
@@ -163,7 +164,7 @@ function Buttons({ following, setFollowing }) {
         For You
       </button>{" "}
       <button
-        class={"top-btn"}
+        className={"top-btn"}
         style={{
           width: "50%",
           marginRight: "10%",

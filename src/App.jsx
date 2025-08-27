@@ -1,7 +1,7 @@
 import { MiddlePart } from "./MiddlePart/MiddlePart";
 import { Sidebar } from "./Layout/Sidebar";
-import { CreateDiv } from "./CreateDiv";
-import { LoadingScreen } from "./LoadingScreen";
+import { CreateDiv } from "./Layout/CreateDiv";
+import { LoadingScreen } from "./Layout/LoadingScreen";
 import { Logo, CreateButton } from "./Layout/Logo";
 import {
   BrowserRouter,
@@ -10,7 +10,7 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import "./App.css";
 
 export const GlobalContext = createContext();
@@ -18,6 +18,17 @@ export const GlobalContext = createContext();
 function GlobalContextProvider({ children }) {
   const [createButtonOn, setCreateButtonOn] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [username, setusername] = useState(null);
+  const [userProfilePic, serUserProfilePic] = useState("");
+
+  useEffect(() => {
+    async function getUser() {
+      const data = await fetch_user();
+      setusername(data.username);
+      serUserProfilePic(data.profile_pic);
+    }
+    getUser();
+  }, []);
 
   return (
     <GlobalContext.Provider
@@ -26,6 +37,8 @@ function GlobalContextProvider({ children }) {
         setCreateButtonOn,
         loading,
         setLoading,
+        username,
+        userProfilePic,
       }}
     >
       {children}
@@ -61,6 +74,22 @@ function AppRoutes() {
       </Routes>
     </>
   );
+}
+
+async function fetch_user() {
+  try {
+    const response = await fetch("/api/user_info", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include", //TODO: remove
+    });
+    const response_json = await response.json();
+    return response_json;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 function App() {

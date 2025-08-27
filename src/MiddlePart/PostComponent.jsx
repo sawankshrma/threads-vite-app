@@ -48,6 +48,12 @@ export function PostComponent({ id, name, time, image, description }) {
     getUser();
   }, []);
 
+  const bodyOfPost = description.map((string, index) => (
+    <div key={index} style={{ minHeight: "15px" }}>
+      {string}
+    </div>
+  ));
+
   return (
     <div style={style} id={id}>
       <div>
@@ -63,13 +69,15 @@ export function PostComponent({ id, name, time, image, description }) {
 
         <div
           style={{
-            fontSize: 15,
+            fontSize: 14,
             fontFamily: "Segoe UI",
             marginTop: 5,
             marginBottom: 10,
+            display: "flex",
+            flexDirection: "column",
           }}
         >
-          {description}
+          {bodyOfPost}
         </div>
         {image !== "" && image !== undefined ? (
           <img src={image} alt="xyz" className="post-image" />

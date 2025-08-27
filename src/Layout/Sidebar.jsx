@@ -22,10 +22,10 @@ export function Sidebar() {
           viewBox="0 0 24 24"
           fill="none"
           stroke="white"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-house text-white w-6 h-6 options"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="lucide lucide-house text-white w-6 h-6 options"
           aria-hidden="true"
         >
           <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>

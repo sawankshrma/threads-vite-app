@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { GlobalContext } from "./App";
+import { GlobalContext } from "../App";
 
 export function LoadingScreen() {
   const { loading } = useContext(GlobalContext);

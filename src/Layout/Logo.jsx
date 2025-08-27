@@ -23,7 +23,14 @@ export function Logo() {
   return (
     <div style={divStyle} className="logo">
       <Link to="/">
-        <img src={logo1} style={{ width: "100%" }}></img>
+        <img
+          id="panchi"
+          src={logo1}
+          style={{
+            width: "100%",
+            filter: "drop-shadow(0 0 20px #12465aff)",
+          }}
+        ></img>
       </Link>
     </div>
   );
@@ -44,7 +51,7 @@ export function CreateButton() {
       <Plus
         className="text-white w-100 h-100"
         color="white"
-        size={55}
+        size={40}
         strokeWidth={3}
       />
     </div>
