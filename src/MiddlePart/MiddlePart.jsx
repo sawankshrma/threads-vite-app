@@ -53,7 +53,7 @@ function Posts({ following, loading, setLoading }) {
     setLoading(true);
     async function getPosts() {
       try {
-        const response = await fetch("http://localhost:5173/api/posts", {
+        const response = await fetch("/api/posts", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -71,6 +71,8 @@ function Posts({ following, loading, setLoading }) {
           description: String(post.body),
           image: post.image_url,
         }));
+
+        console.log();
 
         setPosts(mappedPosts);
       } catch (error) {

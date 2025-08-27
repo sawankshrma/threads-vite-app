@@ -1,40 +1,67 @@
 import { MiddlePart } from "./MiddlePart/MiddlePart";
 import { Sidebar } from "./Layout/Sidebar";
 import { CreateDiv } from "./CreateDiv";
+import { LoadingScreen } from "./LoadingScreen";
 import { Logo, CreateButton } from "./Layout/Logo";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useLocation,
+} from "react-router-dom";
 import { useState, createContext, useContext } from "react";
+import "./App.css";
 
-export const CreateButtonContext = createContext();
-// export const CreateFollowingContext = createContext();
+export const GlobalContext = createContext();
 
-function CreateButtonProvider({ children }) {
+function GlobalContextProvider({ children }) {
   const [createButtonOn, setCreateButtonOn] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   return (
-    <CreateButtonContext.Provider
+    <GlobalContext.Provider
       value={{
         createButtonOn,
         setCreateButtonOn,
+        loading,
+        setLoading,
       }}
     >
       {children}
-    </CreateButtonContext.Provider>
+    </GlobalContext.Provider>
   );
 }
-// function CreateFollowingProvider({ children }) {
-//   const [following, setFollowing] = useState(false);
 
-//   return (
-//     <CreateFollowingContext.Provider
-//       value={{
-//         following,
-//         setFollowing,
-//       }}
-//     >
-//       {children}
-//     </CreateFollowingContext.Provider>
-//   );
-// }
+function AppRoutes() {
+  const location = useLocation();
+
+  return (
+    <>
+      <Logo />
+      <CreateButton />
+      <Sidebar />
+      <CreateDiv />
+      <LoadingScreen />
+      <Routes key={location.pathname}>
+        <Route path="/" element={<MiddlePart key={Date.now()} />} />
+        {/* Route for the landing page, mapped to the "/" path */}
+        {/* <Route */}
+        {/* path="/neet/online-coaching-class-11" */}
+        {/* element={<Class11Program />} */}
+        {/* />{" "} */}
+        {/* Route for Class 11 NEET program page */}
+        {/* <Route
+            path="/neet/online-coaching-class-12"
+            element={<Class12Program />}
+          />{" "} */}
+        {/* Route for Class 12 NEET program page */}
+        {/* <Route path="*" element={<ErrorPage />} />{" "} */}
+        {/* Route for handling unmatched paths, rendering a 404 error page */}
+      </Routes>
+    </>
+  );
+}
 
 function App() {
   return (
@@ -46,30 +73,11 @@ function App() {
       }}
     >
       {/* <CreateFollowingProvider> */}
-      <CreateButtonProvider>
+      <GlobalContextProvider>
         <BrowserRouter>
-          <Logo />
-          <CreateButton />
-          <Sidebar />
-          <CreateDiv />
-          <Routes>
-            <Route path="/" element={<MiddlePart key={Date.now()} />} />
-            {/* Route for the landing page, mapped to the "/" path */}
-            {/* <Route */}
-            {/* path="/neet/online-coaching-class-11" */}
-            {/* element={<Class11Program />} */}
-            {/* />{" "} */}
-            {/* Route for Class 11 NEET program page */}
-            {/* <Route
-            path="/neet/online-coaching-class-12"
-            element={<Class12Program />}
-          />{" "} */}
-            {/* Route for Class 12 NEET program page */}
-            {/* <Route path="*" element={<ErrorPage />} />{" "} */}
-            {/* Route for handling unmatched paths, rendering a 404 error page */}
-          </Routes>
+          <AppRoutes />
         </BrowserRouter>
-      </CreateButtonProvider>
+      </GlobalContextProvider>
       {/* </CreateFollowingProvider> */}
     </div>
   );

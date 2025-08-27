@@ -1,10 +1,30 @@
 html,
 body {
   height: 100%;
-  margin: 0 0 !important;
-  overflow: hidden;
 }
 
 body {
-  margin: 0px !important;
+  margin: 3px !important;
+}
+
+/* Disable blue flash highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove focus outlines */
+*:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove the persistent "blue overlay" on buttons/links */
+a,
+button,
+input,
+textarea,
+select {
+  -webkit-user-select: none; /* Prevents text-selection flash */
+  -webkit-focus-ring-color: transparent !important;
+  outline: none !important;
 }

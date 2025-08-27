@@ -1,16 +1,47 @@
-import { usecontent, createContext, useContext, useState } from "react";
-import { CreateButtonContext } from "./App";
+import {
+  usecontent,
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
+import { GlobalContext } from "./App";
 import { X } from "lucide-react";
 
 export function CreateDiv() {
-  const { createButtonOn, setCreateButtonOn } = useContext(CreateButtonContext);
+  const { createButtonOn, setCreateButtonOn, setLoading } =
+    useContext(GlobalContext);
   const [content, setcontent] = useState({
     body: "",
     image_url: "",
   });
 
+  useEffect(() => {
+    if (createButtonOn) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [createButtonOn]);
+
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key === "Escape") {
+        toggle();
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   function submit() {
-    fetch("http://localhost:5173/api/create_post", {
+    setLoading(true);
+
+    fetch("/api/create_post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,6 +60,7 @@ export function CreateDiv() {
         console.log(result.data);
         if (result.status === 201) {
           console.log("sent");
+          setLoading(false);
           setCreateButtonOn(false);
         } else {
           console.log("not sent!");
@@ -52,6 +84,8 @@ export function CreateDiv() {
         top: "0vh",
         background: "rgba(0,0,0, 0.2)",
         backdropFilter: "blur(7px)",
+        pointerEvents: "none !i",
+        display: "block",
       }}
     >
       <X
@@ -77,7 +111,8 @@ export function CreateDiv() {
           transform: "translate(-50%, -50%)",
           maxWidth: "550px",
           width: "90vw",
-          minHeight: "33vh",
+          height: "auto",
+          paddingBottom: "50px",
           maxHeight: "250px",
           display: "flex",
           flexDirection: "column",
@@ -99,6 +134,7 @@ export function CreateDiv() {
             display: "flex",
             justifyContent: "center",
             borderBottom: "solid 1px rgba(61, 61, 61, 1)",
+            marginBottom: "20px",
           }}
         >
           <b>New Post</b>
@@ -149,7 +185,7 @@ export function CreateDiv() {
               console.log(content); //TODO: remove
             }}
           />
-          <button onClick={submit}>submit</button>
+          <button onClick={submit}>Post</button>
         </div>
       </div>
     </div>

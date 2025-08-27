@@ -3,7 +3,7 @@ import logo from "../assets/twitter.png";
 import { Plus } from "lucide-react";
 import "./Logo.css";
 import { Link } from "react-router-dom";
-import { CreateButtonContext } from "../App";
+import { GlobalContext } from "../App";
 
 const divStyle = {
   zIndex: "11",
@@ -30,7 +30,7 @@ export function Logo() {
 }
 
 export function CreateButton() {
-  const { createButtonOn, setCreateButtonOn } = useContext(CreateButtonContext);
+  const { createButtonOn, setCreateButtonOn } = useContext(GlobalContext);
 
   function toggle() {
     setCreateButtonOn(true);

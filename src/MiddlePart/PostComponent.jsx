@@ -27,7 +27,7 @@ export function PostComponent({ id, name, time, image, description }) {
   useEffect(() => {
     async function getUser() {
       try {
-        const response = await fetch(`http://localhost:5173/api/user/${name}`, {
+        const response = await fetch(`/api/user/${name}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
