@@ -1,11 +1,14 @@
 import { useState, useEffect, useContext } from "react";
 import { PostComponent } from "./PostComponent";
+import { PostComponentModified } from "./PostComponentModified";
+
 import "./MiddlePart.css";
 import { GlobalContext } from "../App";
 
 export function MiddlePart() {
   const [following, setFollowing] = useState(false);
-  const { loading, setLoading } = useContext(GlobalContext);
+  const { loading, setLoading, username, userProfilePic } =
+    useContext(GlobalContext);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -38,6 +41,7 @@ export function MiddlePart() {
       >
         <Posts
           following={following}
+          setFollowing={setFollowing}
           loading={loading}
           setLoading={setLoading}
         />
@@ -46,7 +50,7 @@ export function MiddlePart() {
   );
 }
 
-function Posts({ following, loading, setLoading }) {
+function Posts({ following, loading, setLoading, setFollowing }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -108,7 +112,22 @@ function Posts({ following, loading, setLoading }) {
         // postition: "absolute",
       }}
     >
-      <div>{postComponents}</div>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div
+          style={{
+            color: "white",
+          }}
+        >
+          <PostComponentModified following={following} />
+        </div>
+        <div>{postComponents}</div>
+      </div>
     </div>
   );
 }
