@@ -7,9 +7,9 @@ import { GlobalContext } from "../App";
 
 const divStyle = {
   zIndex: "11",
-  width: "70px",
+  width: "50px",
   position: "fixed",
-  left: "2vh",
+  left: "1.5vw",
   top: "3vh",
 };
 

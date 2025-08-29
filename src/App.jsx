@@ -3,6 +3,8 @@ import { Sidebar } from "./Layout/Sidebar";
 import { CreateDiv } from "./Layout/CreateDiv";
 import { LoadingScreen } from "./Layout/LoadingScreen";
 import { Logo, CreateButton } from "./Layout/Logo";
+import { Message } from "./Layout/Message";
+
 import {
   BrowserRouter,
   Routes,
@@ -20,6 +22,8 @@ function GlobalContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [username, setusername] = useState(null);
   const [userProfilePic, serUserProfilePic] = useState("");
+  const [messageName, setMessageName] = useState("");
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     async function getUser() {
@@ -39,6 +43,10 @@ function GlobalContextProvider({ children }) {
         setLoading,
         username,
         userProfilePic,
+        showMessage,
+        setShowMessage,
+        messageName,
+        setMessageName,
       }}
     >
       {children}
@@ -54,6 +62,7 @@ function AppRoutes() {
       <Logo />
       <CreateButton />
       <Sidebar />
+      <Message />
       <CreateDiv />
       <LoadingScreen />
       <Routes key={location.pathname}>

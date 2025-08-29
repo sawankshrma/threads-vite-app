@@ -27,6 +27,7 @@ export function MiddlePart() {
     >
       {" "}
       <Buttons following={following} setFollowing={setFollowing} />
+      <PostComponentModified following={following} />
       <div
         style={{
           //   background: "#181818",
@@ -123,9 +124,7 @@ function Posts({ following, loading, setLoading, setFollowing }) {
           style={{
             color: "white",
           }}
-        >
-          <PostComponentModified following={following} />
-        </div>
+        ></div>
         <div>{postComponents}</div>
       </div>
     </div>

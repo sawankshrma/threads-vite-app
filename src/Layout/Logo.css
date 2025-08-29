@@ -25,6 +25,10 @@
   transform: scale(1.1);
 }
 
+#panchi:hover {
+  filter: drop-shadow(100px 0 500px rgb(171, 181, 185));
+}
+
 @media (max-width: 750px) {
   .plus-bg1 {
     display: none;

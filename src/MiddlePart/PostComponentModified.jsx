@@ -4,27 +4,29 @@ import { useState, useEffect, useContext } from "react";
 import { GlobalContext } from "../App";
 
 const style = {
-  backgroundColor: "#0e0e0eff",
   color: "white",
   borderWidth: "1px",
   borderRadius: "20px",
-  border: "solid #2b2b2bff ",
   padding: 20,
   marginTop: "10px",
   display: "flex",
   flexDirection: "row",
+  background: "rgba(13, 19, 20, 0.95)",
+  backdropFilter: "blur(15px)",
+  border: "solid 1px rgba(51, 51, 51, 1)",
 };
 
 export function PostComponentModified({ following }) {
   const [profileUrl, setProfileUrl] = useState({ profileImg });
-  const { userProfilePic, setCreateButtonOn } = useContext(GlobalContext);
+  const { userProfilePic, setCreateButtonOn, loading } =
+    useContext(GlobalContext);
 
   useEffect(() => {
     const url = userProfilePic;
     console.log(`profile-pic${userProfilePic}`);
     if (url !== "") setProfileUrl(`${userProfilePic}`);
     else setProfileUrl(profileImg);
-  }, []);
+  }, [loading]);
 
   return !following ? (
     <div style={style} id={556467}>
@@ -52,7 +54,6 @@ export function PostComponentModified({ following }) {
             marginBottom: 5,
             display: "flex",
             flexDirection: "row",
-            // backgroundColor: "green",
             width: "100%",
             height: "34px",
           }}
@@ -72,22 +73,22 @@ export function PostComponentModified({ following }) {
               setCreateButtonOn(true);
             }}
           >
-            What's New?
+            What's Happening?
           </div>
           <button
             style={{
-              backgroundColor: "#1a1a1a",
+              backgroundColor: "#090c0dff",
               color: "white",
               border: "1px solid #333",
               borderRadius: "7px",
-              fontSize: "16px",
+              fontSize: "14.5px",
               fontWeight: "bold",
               cursor: "pointer",
               userSelect: "none",
               outline: "none",
               padding: "10px 10px 10px 10px",
               height: "40px",
-              width: "80px",
+              width: "60px",
             }}
             onClick={() => {
               setCreateButtonOn(true);

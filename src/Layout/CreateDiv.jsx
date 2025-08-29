@@ -10,6 +10,7 @@ import { GlobalContext } from "../App";
 import { X } from "lucide-react";
 import profileImg from "../assets/836.jpg";
 import "./CreateDiv.css";
+import { Message } from "./Message";
 
 export function CreateDiv() {
   const {
@@ -19,6 +20,8 @@ export function CreateDiv() {
     setLoading,
     username,
     userProfilePic,
+    setShowMessage,
+    setMessageName,
   } = useContext(GlobalContext);
   const [content, setcontent] = useState({
     body: "",
@@ -80,12 +83,16 @@ export function CreateDiv() {
           });
           setLoading(false);
           setCreateButtonOn(false);
-
-          return alert("Posted Successfully");
+          setMessageName("Posted Successfully");
+          setShowMessage(true);
+          return;
         } else {
           console.log("not sent!");
           setLoading(false);
-          return alert(`${result.data.error}`);
+          setMessageName(`${result.data.error}!`);
+          setShowMessage(true);
+          return;
+          // return alert(`${result.data.error}`);
         }
       });
   }
@@ -102,6 +109,7 @@ export function CreateDiv() {
     if (url !== "") setProfileUrl(`${userProfilePic}`);
     else setProfileUrl(profileImg);
   }, [createButtonOn]); // createButtonOn bcz for the first time the profile pic might not have loaded,, but i need to give it a chance when i click on the + button every time..
+
   return createButtonOn ? (
     <div className="create-div-overlay">
       <X

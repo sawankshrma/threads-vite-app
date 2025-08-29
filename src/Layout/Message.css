@@ -1,0 +1,43 @@
+.message {
+  position: fixed;
+  bottom: 15vh;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: black;
+  font-family: monospace;
+  font-size: 100%;
+  padding: 12px 20px;
+  border-radius: 8px;
+  opacity: 0;
+  animation: slideFade 2s ease-in-out forwards;
+  width: auto;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 750px) {
+  .message {
+    width: 70vw;
+  }
+}
+
+@keyframes slideFade {
+  0% {
+    transform: translate(-50%, 30px);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+  85% {
+    transform: translate(-50%, -10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -30px);
+    opacity: 0;
+  }
+}
