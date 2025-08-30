@@ -31,6 +31,7 @@ export function CreateDiv() {
   const textAreaRef = useRef(null);
 
   useEffect(() => {
+    handleInput(); // so that if something is already present (as draft), the autoscalling will occur by itself
     if (createButtonOn && textAreaRef.current) {
       textAreaRef.current.focus();
     }
@@ -51,9 +52,16 @@ export function CreateDiv() {
       }
     }
     window.addEventListener("keydown", handleKeyDown);
-
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
+
+  const handleInput = () => {
+    const el = textAreaRef.current;
+    if (el) {
+      el.style.height = "auto"; // reset
+      el.style.height = el.scrollHeight + "px"; // set new height
+    }
+  };
 
   function submit() {
     setLoading(true);
@@ -151,6 +159,7 @@ export function CreateDiv() {
               <div>
                 <textarea
                   ref={textAreaRef}
+                  onInput={handleInput}
                   id="body"
                   className="create-div-input-body"
                   placeholder="What's happening?"

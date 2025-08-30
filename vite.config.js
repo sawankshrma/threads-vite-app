@@ -5,15 +5,31 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
+    setupMiddlewares(middlewares, devServer) {
+      middlewares.use("/set-cookie", (req, res) => {
+        const url = new URL(req.url, `http://${req.headers.host}`);
+        const key = url.searchParams.get("key") || "myKey";
+        const value = url.searchParams.get("value") || "myValue";
+
+        res.writeHead(200, {
+          "Content-Type": "text/plain",
+          "Set-Cookie": `${key}=${value}; Path=/`,
+        });
+        res.end(`Cookie ${key}=${value} set ✅`);
+      });
+
+      return middlewares;
+    },
     proxy: {
       "/api": {
-        target: "http://localhost:8001",
+        target: "http://localhost:8001/",
         changeOrigin: true,
         secure: false,
       },
     },
     allowedHosts: [
-      "ccb8f1f91e88291a03f0d3cfbd64141d.serveo.net", //
+      "https://35461e231d364d2f4b5ebdd41e93ddfc.serveo.net",
+      "ebf67a73233a7aec77610636841d8326.serveo.net",
     ],
     host: true,
     port: 5173,

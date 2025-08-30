@@ -61,7 +61,13 @@ export function PostComponent({ id, name, time, image, description }) {
       </div>
       <div style={{ marginLeft: 10, marginRight: 10 }}>
         <div style={{ display: "flex", width: "100%" }}>
-          <div style={{ fontSize: 15, fontFamily: "monospace" }}>
+          <div
+            style={{
+              fontSize: 17.5,
+              fontFamily: "monospace",
+              fontWeight: 5000,
+            }}
+          >
             <b>{name} </b>
             <span className="ago">{timed}</span>
           </div>
@@ -69,7 +75,7 @@ export function PostComponent({ id, name, time, image, description }) {
 
         <div
           style={{
-            fontSize: 14,
+            fontSize: 15,
             fontFamily: "Segoe UI",
             marginTop: 5,
             marginBottom: 10,
