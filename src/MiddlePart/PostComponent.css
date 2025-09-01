@@ -10,6 +10,7 @@
   display: block;
   margin: 0 auto;
   border-radius: 7px;
+  margin-bottom: 12px;
 }
 
 .profile-pic {
@@ -18,4 +19,8 @@
   border-radius: 40px;
   object-fit: cover;
   object-position: center;
+}
+
+.already_liked {
+  background-color: red;
 }

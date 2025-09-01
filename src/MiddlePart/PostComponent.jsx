@@ -1,7 +1,9 @@
 // Create a style object to apply styles to the div element in PostComponent
 import "./PostComponent.css";
 import profileImg from "../assets/836.jpg";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
+import { GlobalContext } from "../App";
+import Button from "./Checkbox";
 
 const style = {
   backgroundColor: "#0e0e0eff",
@@ -17,12 +19,21 @@ const style = {
   flexDirection: "row",
 };
 
-export function PostComponent({ id, name, time, image, description }) {
+export function PostComponent({
+  id,
+  name,
+  time,
+  image,
+  description,
+  liked_users,
+}) {
   // console.log(timeAgo(time, Date.now()));
-
+  const { username } = useContext(GlobalContext);
   const timed = timeAgo(time);
-
+  const likeRef = useRef(null);
   const [profileUrl, setProfileUrl] = useState({ profileImg });
+  const [likeIsOn, setLikeIsOn] = useState(false);
+  const [fetchDone, setFetchDone] = useState(false);
 
   useEffect(() => {
     async function getUser() {
@@ -43,6 +54,12 @@ export function PostComponent({ id, name, time, image, description }) {
         // console.log(`${name} is = ${owner.profile_pic_url}`);
       } catch (error) {
         console.error(error);
+      } finally {
+        function like_isOn(arr, username) {
+          return arr.includes(String(username));
+        }
+        setLikeIsOn(like_isOn(liked_users, username));
+        setFetchDone(like_isOn(liked_users, username));
       }
     }
     getUser();
@@ -54,13 +71,47 @@ export function PostComponent({ id, name, time, image, description }) {
     </div>
   ));
 
+  async function likeFunction() {
+    try {
+      if (likeIsOn) {
+        setLikeIsOn(false);
+        const response = await fetch(`/api/post/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ to_like: false }),
+          credentials: "include", // TODO: remove
+        });
+
+        if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+
+        console.log("unliked");
+      } else {
+        setLikeIsOn(true);
+        const response = await fetch(`/api/post/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ to_like: true }),
+          credentials: "include", // TODO: remove
+        });
+
+        if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+
+        console.log("liked");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div style={style} id={id}>
       <div>
         <img src={profileUrl} className="profile-pic" />
       </div>
       <div style={{ marginLeft: 10, marginRight: 10 }}>
-        <div style={{ display: "flex", width: "100%" }}>
+        <div
+          style={{ display: "flex", width: "100%", alignItems: "flex-start" }}
+        >
           <div
             style={{
               fontSize: 17.5,
@@ -88,6 +139,14 @@ export function PostComponent({ id, name, time, image, description }) {
         {image !== "" && image !== undefined ? (
           <img src={image} alt="xyz" className="post-image" />
         ) : null}
+        <Button
+          style={{ alignSelf: "center" }}
+          id={`like-${id}`}
+          onToggle={likeFunction}
+          likes={liked_users.length}
+          likeIsOn={likeIsOn}
+          fetchDone={fetchDone}
+        />
       </div>
     </div>
   );

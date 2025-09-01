@@ -4,6 +4,7 @@ import { PostComponentModified } from "./PostComponentModified";
 
 import "./MiddlePart.css";
 import { GlobalContext } from "../App";
+import { FlaskRound } from "lucide-react";
 
 export function MiddlePart() {
   const [following, setFollowing] = useState(false);
@@ -45,13 +46,14 @@ export function MiddlePart() {
           setFollowing={setFollowing}
           loading={loading}
           setLoading={setLoading}
+          username={username}
         />
       </div>
     </div>
   );
 }
 
-function Posts({ following, loading, setLoading, setFollowing }) {
+function Posts({ following, loading, setLoading, username, setFollowing }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -79,12 +81,13 @@ function Posts({ following, loading, setLoading, setFollowing }) {
           time: String(post.created_at),
           description: to_arr(post.body),
           image: post.image_url,
+          liked_users: post.liked_users,
         }));
 
         // console.log(mappedPosts);
         setPosts(mappedPosts);
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       } finally {
         setLoading(false);
       }
@@ -101,8 +104,10 @@ function Posts({ following, loading, setLoading, setFollowing }) {
       time={post.time}
       image={post.image}
       description={post.description}
+      liked_users={post.liked_users}
     />
   ));
+  console.log();
 
   return loading ? null : (
     <div

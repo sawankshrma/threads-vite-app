@@ -23,7 +23,6 @@ export function PostComponentModified({ following }) {
 
   useEffect(() => {
     const url = userProfilePic;
-    console.log(`profile-pic${userProfilePic}`);
     if (url !== "") setProfileUrl(`${userProfilePic}`);
     else setProfileUrl(profileImg);
   }, [loading]);
