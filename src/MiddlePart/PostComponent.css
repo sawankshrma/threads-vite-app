@@ -24,3 +24,14 @@
 .already_liked {
   background-color: red;
 }
+
+.style {
+  padding: 20px;
+}
+
+@media (max-width: 750px) {
+  .style {
+    padding: 10px;
+    padding-top: 15px !important;
+  }
+}

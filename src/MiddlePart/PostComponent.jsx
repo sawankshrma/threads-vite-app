@@ -12,8 +12,7 @@ const style = {
   borderRadius: "20px",
   borderTop: "solid #2b2b2bff ",
   borderBottom: "solid #2b2b2bff",
-
-  padding: 20,
+  paddingBottom: "10px !important",
   margin: "10px 0px",
   display: "flex",
   flexDirection: "row",
@@ -104,7 +103,7 @@ export function PostComponent({
   }
 
   return (
-    <div style={style} id={id}>
+    <div style={{ ...style }} className="style" id={id}>
       <div>
         <img src={profileUrl} className="profile-pic" />
       </div>
@@ -114,9 +113,9 @@ export function PostComponent({
         >
           <div
             style={{
-              fontSize: 17.5,
+              fontSize: 16.5,
               fontFamily: "monospace",
-              fontWeight: 5000,
+              fontWeight: 1000,
             }}
           >
             <b>{name} </b>
