@@ -5,8 +5,34 @@ import { PostComponentModified } from "./PostComponentModified";
 import "./MiddlePart.css";
 import { GlobalContext } from "../App";
 import { FlaskRound } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export function MiddlePart() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetch_user() {
+      try {
+        const response = await fetch("/api/user_info", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include", //TODO: remove
+        });
+        const response_json = await response.json();
+        return response_json;
+      } catch (error) {
+        console.log("user_not_found");
+        setTimeout(() => {
+          navigate("/login");
+        }, 1);
+        console.error(error);
+      }
+    }
+    fetch_user();
+  }, []);
+
   const [following, setFollowing] = useState(false);
   const { loading, setLoading, username, userProfilePic } =
     useContext(GlobalContext);

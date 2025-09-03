@@ -1,0 +1,150 @@
+/* Overlay */
+.create-div-overlaynew {
+  z-index: 15;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(50px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main Modal */
+.create-div-modalnew {
+  position: fixed;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  max-width: 350px;
+  width: 90vw;
+  height: auto;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(16, 18, 20, 0.95);
+  border: solid 1px rgba(51, 51, 51, 1);
+  border-radius: 20px;
+  box-shadow: 0px 0px 13px 13px rgba(59, 72, 79, 0.3);
+}
+
+.register-div-modalnew {
+  max-width: 600px !important;
+}
+
+/* Header */
+.create-div-headernew {
+  width: 100%;
+  color: white;
+  font-family: sans-serif;
+  font-size: 19px;
+  padding: 13px 0;
+  display: flex;
+  justify-content: center;
+  border-bottom: solid 1px rgba(61, 61, 61, 1);
+  margin-bottom: 20px;
+}
+
+.create-div-inputnew {
+  flex: 1;
+  width: 80% !important;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  background: #222; /* simple dark */
+  color: white;
+  letter-spacing: 1.5px;
+  font-family: monospace;
+}
+
+.create-div-input-registernew {
+  padding: 10px 30px;
+  font-family: sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.submit-btnnew {
+  padding: 8px 0%;
+  font-size: 15px;
+  width: 25%;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb; /* blue */
+  color: white;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.submit-btnnew:hover {
+  background: #1d4ed8; /* darker blue */
+}
+
+.create-div-input-bodynew {
+  width: 100%;
+}
+
+.submiting-divnew {
+  margin-top: 0px;
+}
+
+#bodynew {
+  margin-top: 2px;
+  border: none;
+  margin-left: -3px;
+  background: transparent;
+  padding: 5px;
+  padding-left: 7px;
+  color: white;
+  font-family: Segoe UI, sans-serif;
+  width: 95%;
+  resize: none;
+  overflow: auto;
+  border-radius: 5px;
+  max-height: 70vh;
+  font-size: 15px;
+}
+
+@media (max-width: 750px) {
+  #bodynew {
+    max-height: 50vh;
+  }
+}
+
+.redirectnew {
+  margin: 2px;
+  color: rgb(176, 176, 176);
+  font-size: 14.5px;
+  font-family: sans-serif;
+  position: sticky;
+  z-index: 15;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 95px);
+}
+
+.redirect1new {
+  margin: 2px;
+  color: rgb(176, 176, 176);
+  font-size: 14.5px;
+  font-family: sans-serif;
+  position: sticky;
+  z-index: 15;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 165px);
+}
+
+a {
+  all: unset; /* removes all default user-agent styles */
+  cursor: pointer; /* add back cursor */
+  color: rgba(215, 221, 225, 0.904); /* inherit text color */
+}

@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 import { GlobalContext } from "../App";
 
 const divStyle = {
-  zIndex: "11",
-  width: "50px",
+  zIndex: "50",
+  width: "55px",
   position: "fixed",
-  left: "1.5vw",
+  left: "1vw",
   top: "3vh",
 };
 

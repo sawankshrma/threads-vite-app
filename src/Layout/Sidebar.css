@@ -1,13 +1,13 @@
 .side-bar {
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(5px);
-  border: solid 1px #191919ff;
+  /* border: solid 1px rgb(16, 16, 16); */
   border-radius: 10px;
   height: 360px !important;
   width: 70px;
   z-index: 9;
   position: fixed;
-  left: 0.5vw;
+  left: 0.15vw;
   top: 25vh;
   display: flex;
   flex-direction: column;
@@ -33,10 +33,16 @@
 .options {
   transition: transform 0.1s ease-in-out;
   cursor: pointer;
+  opacity: 70%;
 }
+
+.options:hover {
+  opacity: 100%;
+}
+
 @media (min-width: 750px) {
   .options:hover {
-    transform: scale(1.3);
+    transform: scale(1.15);
   }
 }
 

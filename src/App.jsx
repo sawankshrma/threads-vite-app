@@ -4,6 +4,8 @@ import { CreateDiv } from "./Layout/CreateDiv";
 import { LoadingScreen } from "./Layout/LoadingScreen";
 import { Logo, CreateButton } from "./Layout/Logo";
 import { Message } from "./Layout/Message";
+import { Login } from "./Auth/Login";
+import { Register } from "./Auth/Register";
 
 import {
   BrowserRouter,
@@ -11,6 +13,7 @@ import {
   Route,
   Link,
   useLocation,
+  useNavigate,
 } from "react-router-dom";
 import { useState, createContext, useContext, useEffect } from "react";
 import "./App.css";
@@ -67,19 +70,8 @@ function AppRoutes() {
       <LoadingScreen />
       <Routes key={location.pathname}>
         <Route path="/" element={<MiddlePart key={Date.now()} />} />
-        {/* Route for the landing page, mapped to the "/" path */}
-        {/* <Route */}
-        {/* path="/neet/online-coaching-class-11" */}
-        {/* element={<Class11Program />} */}
-        {/* />{" "} */}
-        {/* Route for Class 11 NEET program page */}
-        {/* <Route
-            path="/neet/online-coaching-class-12"
-            element={<Class12Program />}
-          />{" "} */}
-        {/* Route for Class 12 NEET program page */}
-        {/* <Route path="*" element={<ErrorPage />} />{" "} */}
-        {/* Route for handling unmatched paths, rendering a 404 error page */}
+        <Route path="/login" element={<Login key={Date.now()} />} />
+        <Route path="/register" element={<Register key={Date.now()} />} />
       </Routes>
     </>
   );
@@ -97,6 +89,8 @@ async function fetch_user() {
     const response_json = await response.json();
     return response_json;
   } catch (error) {
+    console.log("user_not_found");
+
     console.error(error);
   }
 }
