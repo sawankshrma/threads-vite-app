@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import { GlobalContext } from "../App";
 
 export function Sidebar() {
-  const { createButtonOn, setCreateButtonOn } = useContext(GlobalContext);
+  const { createButtonOn, setCreateButtonOn, userName } =
+    useContext(GlobalContext);
 
   function toggle() {
     setCreateButtonOn(true);
@@ -63,12 +64,14 @@ export function Sidebar() {
       />
 
       {/* User */}
-      <User
-        className="text-gray-500 w-6 h-6 options"
-        color="white"
-        size={32}
-        strokeWidth={1.5}
-      />
+      <Link to={`/u/${userName}`}>
+        <User
+          className="text-gray-500 w-6 h-6 options"
+          color="white"
+          size={32}
+          strokeWidth={1.5}
+        />
+      </Link>
     </div>
   );
 }

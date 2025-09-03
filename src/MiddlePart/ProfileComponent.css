@@ -1,0 +1,87 @@
+.profile-pic1 {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profile-pic-container {
+  width: 30%;
+  aspect-ratio: 1/1;
+}
+
+.profile-pic1-new {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profile-pic-container-new {
+  width: 30%;
+  aspect-ratio: 1/1;
+}
+
+.ago-new {
+  color: grey;
+}
+
+.post-image-new {
+  max-height: 400px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  border-radius: 7px;
+  margin-bottom: 12px;
+}
+
+.profile-pic-new {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.already_liked-new {
+  background-color: red;
+}
+
+.style-new {
+  padding: 20px;
+}
+
+@media (max-width: 750px) {
+  .style-new {
+    padding: 10px;
+    padding-top: 15px !important;
+  }
+
+  .profile-pic-container-new {
+    width: 40%; /* scale better on smaller screens */
+  }
+}
+
+.style22 {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+.style21 {
+  font-size: 11px;
+  color: grey;
+}
+
+@media (min-width: 750px) {
+  .style22 {
+    font-size: 20px;
+  }
+  .style21 {
+    font-size: 14px;
+    color: grey;
+  }
+}

@@ -18,7 +18,7 @@ export function CreateDiv() {
     setCreateButtonOn,
     loading,
     setLoading,
-    username,
+    userName,
     userProfilePic,
     setShowMessage,
     setMessageName,
@@ -31,6 +31,7 @@ export function CreateDiv() {
   const textAreaRef = useRef(null);
 
   useEffect(() => {
+    console.log(userName);
     handleInput(); // so that if something is already present (as draft), the autoscalling will occur by itself
     if (createButtonOn && textAreaRef.current) {
       textAreaRef.current.focus();
@@ -152,7 +153,7 @@ export function CreateDiv() {
             >
               <div style={{ display: "flex", width: "100%" }}>
                 <div style={{ fontSize: 18, fontFamily: "monospace" }}>
-                  <b>{username} </b>
+                  <b>{userName} </b>
                 </div>
               </div>
 

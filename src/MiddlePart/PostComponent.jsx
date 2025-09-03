@@ -27,7 +27,7 @@ export function PostComponent({
   liked_users,
 }) {
   // console.log(timeAgo(time, Date.now()));
-  const { username } = useContext(GlobalContext);
+  const { userName } = useContext(GlobalContext);
   const timed = timeAgo(time);
   const likeRef = useRef(null);
   const [profileUrl, setProfileUrl] = useState({ profileImg });
@@ -54,11 +54,11 @@ export function PostComponent({
       } catch (error) {
         console.error(error);
       } finally {
-        function like_isOn(arr, username) {
-          return arr.includes(String(username));
+        function like_isOn(arr, userName) {
+          return arr.includes(String(userName));
         }
-        setLikeIsOn(like_isOn(liked_users, username));
-        setFetchDone(like_isOn(liked_users, username));
+        setLikeIsOn(like_isOn(liked_users, userName));
+        setFetchDone(like_isOn(liked_users, userName));
       }
     }
     getUser();

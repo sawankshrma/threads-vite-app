@@ -8,16 +8,6 @@ import { Link, useNavigate } from "react-router-dom";
 export function Login() {
   const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     function handleKeyDown(e) {
-  //       if (e.key === "Enter") {
-  //         submit();
-  //       }
-  //     }
-  //     window.addEventListener("keydown", handleKeyDown);
-  //     return () => window.removeEventListener("keydown", handleKeyDown);
-  //   }, []);
-
   const {
     createButtonOn,
     setCreateButtonOn,

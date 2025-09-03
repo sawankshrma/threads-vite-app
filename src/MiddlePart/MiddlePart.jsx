@@ -1,60 +1,134 @@
 import { useState, useEffect, useContext } from "react";
 import { PostComponent } from "./PostComponent";
 import { PostComponentModified } from "./PostComponentModified";
+import { ProfileComponent } from "./ProfileComponent";
 
 import "./MiddlePart.css";
 import { GlobalContext } from "../App";
-import { FlaskRound } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export function MiddlePart() {
+export function MiddlePart({ type }) {
   const navigate = useNavigate();
+  const { profile_userName } = useParams();
+  const [userFound, setUserFound] = useState(true);
+  const [myProfile, setMyProfile] = useState(false);
+  const [following, setFollowing] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
+
+  const {
+    loading,
+    setLoading,
+    userName,
+    setUserName,
+    userProfilePic,
+    setUserProfilePic,
+  } = useContext(GlobalContext);
+
+  async function fetch_user() {
+    try {
+      const response = await fetch("/api/user_info", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", //TODO: remove
+      });
+      const response_json = await response.json();
+      // console.log(response_json.username);
+      // setUserName(response_json.username);
+      return response_json;
+    } catch (error) {
+      console.log("user_not_found");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1);
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
-    async function fetch_user() {
-      try {
-        const response = await fetch("/api/user_info", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include", //TODO: remove
-        });
-        const response_json = await response.json();
-        return response_json;
-      } catch (error) {
-        console.log("user_not_found");
-        setTimeout(() => {
-          navigate("/login");
-        }, 1);
-        console.error(error);
-      }
+    async function getUser() {
+      const data = await fetch_user();
+      console.log(data.username);
+      setUserName(data.username);
+      setUserProfilePic(data.profile_pic);
     }
-    fetch_user();
+    getUser();
   }, []);
 
-  const [following, setFollowing] = useState(false);
-  const { loading, setLoading, username, userProfilePic } =
-    useContext(GlobalContext);
+  useEffect(() => {
+    setTimeout(() => {
+      setFollowing(true);
+    }, 100);
+    setTimeout(() => {
+      setFollowing(false);
+    }, 120);
+  }, []);
+
+  useEffect(() => {
+    if (userName) {
+      console.log(userName);
+      fetch_this_user();
+      async function fetch_this_user() {
+        try {
+          const response = await fetch(
+            `/api/user/${String(profile_userName)}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              credentials: "include", //TODO: remove
+            }
+          );
+          if (!response.ok) {
+            console.log("userNotFound"); //TODO: show a div
+            setUserFound(false);
+            return;
+          }
+          const response_json = await response.json();
+
+          console.log(response_json.username);
+          setUserInfo(response_json);
+          if (response_json.username === userName) {
+            console.log("matched");
+            setMyProfile(true);
+          }
+          return;
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    }
+  }, [userName]);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, [following]);
 
-  return (
+  return userFound || type == "normal" ? (
     <div
       style={{
         // transform: "translateX(25vw)",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
+        alignItems: "center",
         width: "100%",
         maxWidth: "650px",
       }}
     >
-      {" "}
-      <Buttons following={following} setFollowing={setFollowing} />
-      <PostComponentModified following={following} />
+      {type == "normal" ? (
+        <Buttons following={following} setFollowing={setFollowing} />
+      ) : null}
+      {type == "normal" ? (
+        <PostComponentModified following={following} />
+      ) : null}
+
+      {type == "profile_page" ? (
+        <ProfileComponent following={following} userInfo={userInfo} />
+      ) : null}
+
       <div
         style={{
           //   background: "#181818",
@@ -72,14 +146,24 @@ export function MiddlePart() {
           setFollowing={setFollowing}
           loading={loading}
           setLoading={setLoading}
-          username={username}
+          profile_userName={profile_userName}
+          type={type}
         />
       </div>
     </div>
+  ) : (
+    <div style={{ color: "white" }}> User Not Found </div>
   );
 }
 
-function Posts({ following, loading, setLoading, username, setFollowing }) {
+function Posts({
+  following,
+  loading,
+  setLoading,
+  profile_userName,
+  type,
+  setFollowing,
+}) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -110,8 +194,16 @@ function Posts({ following, loading, setLoading, username, setFollowing }) {
           liked_users: post.liked_users,
         }));
 
+        let finalPosts = mappedPosts;
+
+        if (type === "profile_page") {
+          finalPosts = mappedPosts.filter(
+            (post) => post.name === profile_userName
+          );
+        }
+
         // console.log(mappedPosts);
-        setPosts(mappedPosts);
+        setPosts(finalPosts);
       } catch (error) {
         // console.error(error);
       } finally {

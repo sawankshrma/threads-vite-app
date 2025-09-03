@@ -4,6 +4,8 @@ import { useState, useEffect, useContext } from "react";
 import { GlobalContext } from "../App";
 
 const style = {
+  width: "100%",
+  maxWidth: "90vw",
   color: "white",
   borderWidth: "1px",
   borderRadius: "20px",
@@ -18,14 +20,13 @@ const style = {
 
 export function PostComponentModified({ following }) {
   const [profileUrl, setProfileUrl] = useState({ profileImg });
-  const { userProfilePic, setCreateButtonOn, loading } =
-    useContext(GlobalContext);
+  const { userProfilePic, setCreateButtonOn } = useContext(GlobalContext);
 
   useEffect(() => {
     const url = userProfilePic;
     if (url !== "") setProfileUrl(`${userProfilePic}`);
     else setProfileUrl(profileImg);
-  }, [loading]);
+  }, [following]);
 
   return !following ? (
     <div style={style} id={556467}>

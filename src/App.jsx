@@ -23,19 +23,10 @@ export const GlobalContext = createContext();
 function GlobalContextProvider({ children }) {
   const [createButtonOn, setCreateButtonOn] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [username, setusername] = useState(null);
-  const [userProfilePic, serUserProfilePic] = useState("");
+  const [userName, setUserName] = useState(null);
+  const [userProfilePic, setUserProfilePic] = useState("");
   const [messageName, setMessageName] = useState("");
   const [showMessage, setShowMessage] = useState(false);
-
-  useEffect(() => {
-    async function getUser() {
-      const data = await fetch_user();
-      setusername(data.username);
-      serUserProfilePic(data.profile_pic);
-    }
-    getUser();
-  }, []);
 
   return (
     <GlobalContext.Provider
@@ -44,7 +35,9 @@ function GlobalContextProvider({ children }) {
         setCreateButtonOn,
         loading,
         setLoading,
-        username,
+        userName,
+        setUserName,
+        setUserProfilePic,
         userProfilePic,
         showMessage,
         setShowMessage,
@@ -69,30 +62,25 @@ function AppRoutes() {
       <CreateDiv />
       <LoadingScreen />
       <Routes key={location.pathname}>
-        <Route path="/" element={<MiddlePart key={Date.now()} />} />
+        <Route
+          path="/"
+          element={<MiddlePart type="normal" key={Date.now()} />}
+        />
         <Route path="/login" element={<Login key={Date.now()} />} />
         <Route path="/register" element={<Register key={Date.now()} />} />
+        <Route
+          path="/u/:profile_userName"
+          element={<MiddlePart type="profile_page" />}
+          key={Date.now()}
+        />
+
+        <Route
+          path="*"
+          element={<h1 style={{ color: "white" }}>Not Found</h1>}
+        />
       </Routes>
     </>
   );
-}
-
-async function fetch_user() {
-  try {
-    const response = await fetch("/api/user_info", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include", //TODO: remove
-    });
-    const response_json = await response.json();
-    return response_json;
-  } catch (error) {
-    console.log("user_not_found");
-
-    console.error(error);
-  }
 }
 
 function App() {
