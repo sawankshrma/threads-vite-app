@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { GlobalContext } from "../App";
 
 export function Sidebar() {
-  const { createButtonOn, setCreateButtonOn, userName } =
+  const { setCreateButtonOn, userName, setShowMessage, setMessageName } =
     useContext(GlobalContext);
 
   function toggle() {
@@ -40,6 +40,10 @@ export function Sidebar() {
         color="white"
         size={32}
         strokeWidth={1.5}
+        onClick={() => {
+          setMessageName("SEARCH feature coming after mid-sem :)");
+          setShowMessage(true);
+        }}
       />
 
       {/* Plus Button */}

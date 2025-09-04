@@ -8,6 +8,10 @@ import { Link, useNavigate } from "react-router-dom";
 export function Login() {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    document.title = "Login - TweetX";
+  }, []);
+
   const {
     createButtonOn,
     setCreateButtonOn,

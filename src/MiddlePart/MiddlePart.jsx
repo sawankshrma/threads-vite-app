@@ -42,6 +42,13 @@ export function MiddlePart({ type }) {
   const [following, setFollowing] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
 
+  useEffect(() => {
+    if (type == "normal") document.title = "Home - TweetX";
+    if (type == "profile_page")
+      document.title = `@${profile_userName} - TweetX`;
+    if (type == "liked_page") document.title = "Likes - TweetX";
+  }, []);
+
   const {
     loading,
     setLoading,

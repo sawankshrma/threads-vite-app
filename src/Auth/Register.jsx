@@ -8,15 +8,9 @@ import { Link, useNavigate } from "react-router-dom";
 export function Register() {
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   function handleKeyDown(e) {
-  //     if (e.key === "Enter") {
-  //       submit();
-  //     }
-  //   }
-  //   window.addEventListener("keydown", handleKeyDown);
-  //   return () => window.removeEventListener("keydown", handleKeyDown);
-  // }, []);
+  useEffect(() => {
+    document.title = "Register - TweetX";
+  }, []);
 
   const {
     createButtonOn,
