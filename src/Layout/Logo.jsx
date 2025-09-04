@@ -35,6 +35,32 @@ export function Logo() {
     </div>
   );
 }
+export function Github() {
+  return (
+    <div
+      style={{
+        zIndex: "50",
+        width: "55px",
+        position: "fixed",
+        right: "1vw",
+        top: "3vh",
+      }}
+      className="logo"
+    >
+      <a href="https://github.com/sawankshrma/threads-vite-app" target="_blank">
+        <img
+          id="pan"
+          src="https://i.pinimg.com/1200x/b5/1b/78/b51b78ecc9e5711274931774e433b5e6.jpg"
+          style={{
+            borderRadius: "45%",
+            width: "90%",
+            filter: "drop-shadow(0 0 20px #12465aff)",
+          }}
+        ></img>
+      </a>
+    </div>
+  );
+}
 
 export function CreateButton() {
   const { createButtonOn, setCreateButtonOn } = useContext(GlobalContext);

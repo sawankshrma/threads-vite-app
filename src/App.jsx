@@ -3,7 +3,7 @@ import { Sidebar } from "./Layout/Sidebar";
 import { CreateDiv } from "./Layout/CreateDiv";
 import { ShowImage } from "./Layout/ShowImage";
 import { LoadingScreen } from "./Layout/LoadingScreen";
-import { Logo, CreateButton } from "./Layout/Logo";
+import { Logo, CreateButton, Github } from "./Layout/Logo";
 import { Message } from "./Layout/Message";
 import { Login } from "./Auth/Login";
 import { Register } from "./Auth/Register";
@@ -69,6 +69,7 @@ function AppRoutes() {
       <CreateDiv />
       <LoadingScreen />
       <ShowImage />
+      <Github />
       <Routes key={location.pathname}>
         <Route
           path="/"
