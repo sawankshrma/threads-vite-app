@@ -23,15 +23,56 @@ const style1 = {
 
 export function ProfileComponent({ following, setUserInfo, userInfo }) {
   const [profileUrl, setProfileUrl] = useState(profileImg);
-  const { setCreateButtonOn } = useContext(GlobalContext);
+  const { setCreateButtonOn, userName, setMessageName, setShowMessage } =
+    useContext(GlobalContext);
+  const [amIfollowing, setAmIFollowing] = useState(false);
 
   useEffect(() => {
     if (userInfo) {
-      console.log(userInfo);
+      //   console.log(userInfo);
       const url = userInfo.profile_pic_url;
       if (url !== "") setProfileUrl(`${userInfo.profile_pic_url}`);
     }
-  }, [userInfo]);
+    if (userInfo && userName) {
+      console.log(userInfo);
+      console.log(userInfo.followers);
+      function followOn(arr, userName) {
+        return arr.includes(userName);
+      }
+      console.log(followOn(userInfo.followers, userName));
+      setAmIFollowing(followOn(userInfo.followers, userName));
+    }
+  }, [userInfo, userName]);
+
+  function followHim() {
+    console.log(amIfollowing);
+
+    async function follow111() {
+      try {
+        const response = await fetch(`../../api/user/${userInfo.username}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            to_follow: !amIfollowing,
+          }),
+          credentials: "include", //TODO: remove
+        });
+        // const response_json = await response.json();
+        setMessageName(
+          `Started ${!amIfollowing ? "Following" : "Unfollowing"} ${
+            userInfo.username
+          }`
+        );
+        setAmIFollowing(!amIfollowing);
+        setShowMessage(true);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    follow111();
+  }
 
   return !following ? (
     <div style={style1} id="556468new">
@@ -167,14 +208,12 @@ export function ProfileComponent({ following, setUserInfo, userInfo }) {
               outline: "none",
               padding: "10px 10px 10px 10px",
               height: "40px",
-              width: "100px",
+              width: "auto",
               marginTop: "-15px",
             }}
-            onClick={() => {
-              setCreateButtonOn(true);
-            }}
+            onClick={followHim}
           >
-            Follow
+            {amIfollowing ? "Unfollow" : "Follow"}
           </button>
         </div>
       </div>

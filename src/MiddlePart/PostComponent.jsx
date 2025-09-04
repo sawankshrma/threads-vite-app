@@ -4,6 +4,7 @@ import profileImg from "../assets/836.jpg";
 import { useState, useEffect, useRef, useContext } from "react";
 import { GlobalContext } from "../App";
 import Button from "./Checkbox";
+import { Link } from "react-router-dom";
 
 const style = {
   backgroundColor: "#0e0e0eff",
@@ -105,7 +106,9 @@ export function PostComponent({
   return (
     <div style={{ ...style }} className="style" id={id}>
       <div>
-        <img src={profileUrl} className="profile-pic" />
+        <Link to={`/u/${name}`}>
+          <img src={profileUrl} className="profile-pic" />
+        </Link>
       </div>
       <div style={{ marginLeft: 10, marginRight: 10 }}>
         <div
@@ -118,7 +121,9 @@ export function PostComponent({
               fontWeight: 1000,
             }}
           >
-            <b>{name} </b>
+            <Link to={`/u/${name}`}>
+              <b>{name} </b>
+            </Link>
             <span className="ago">{timed}</span>
           </div>
         </div>

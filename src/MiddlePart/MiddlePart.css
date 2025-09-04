@@ -7,3 +7,10 @@
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
 }
+
+h2 {
+  margin: 5px;
+  font-size: large;
+
+  color: rgba(166, 191, 195, 0.986);
+}

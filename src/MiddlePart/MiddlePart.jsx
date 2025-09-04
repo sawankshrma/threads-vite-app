@@ -7,6 +7,33 @@ import "./MiddlePart.css";
 import { GlobalContext } from "../App";
 import { useNavigate, useParams } from "react-router-dom";
 
+function WaitingComponent() {
+  const { setLoading } = useContext(GlobalContext);
+  const [toShow, setToShow] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setToShow(false);
+    }, 500);
+  });
+
+  return toShow ? (
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        backgroundColor: "black",
+        color: "white ",
+        justifyContent: "center",
+        padding: "20px",
+        fontFace: "monospace",
+      }}
+    >
+      <h4>loading...</h4>
+    </div>
+  ) : null;
+}
+
 export function MiddlePart({ type }) {
   const navigate = useNavigate();
   const { profile_userName } = useParams();
@@ -141,6 +168,24 @@ export function MiddlePart({ type }) {
           //   position: "absolute",
         }}
       >
+        <WaitingComponent />
+        {type == "profile_page" ? (
+          <div
+            style={{
+              width: "100%",
+              height: "auto",
+              backgroundColor: "black",
+              color: "white ",
+              padding: "0px",
+              // marginLeft: "50px",
+              fontFamily: "Sans-serif",
+              // backgroundColor: "Green",
+            }}
+          >
+            <h2>All Posts:</h2>
+          </div>
+        ) : null}
+
         <Posts
           following={following}
           setFollowing={setFollowing}
@@ -152,7 +197,10 @@ export function MiddlePart({ type }) {
       </div>
     </div>
   ) : (
-    <div style={{ color: "white" }}> User Not Found </div>
+    <div style={{ color: "white", marginTop: "10vh" }}>
+      {" "}
+      <h1>User Not Found</h1>{" "}
+    </div>
   );
 }
 

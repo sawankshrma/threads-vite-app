@@ -26,7 +26,7 @@ export function PostComponentModified({ following }) {
     const url = userProfilePic;
     if (url !== "") setProfileUrl(`${userProfilePic}`);
     else setProfileUrl(profileImg);
-  }, [following]);
+  }, [following, userProfilePic]);
 
   return !following ? (
     <div style={style} id={556467}>
