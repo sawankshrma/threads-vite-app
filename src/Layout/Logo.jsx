@@ -39,7 +39,7 @@ export function Github() {
   return (
     <div
       style={{
-        zIndex: "50",
+        zIndex: "0",
         width: "55px",
         position: "fixed",
         right: "1vw",
