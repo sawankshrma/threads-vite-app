@@ -73,10 +73,17 @@ function AppRoutes() {
           element={<MiddlePart type="profile_page" />}
           key={Date.now()}
         />
+        <Route
+          path="/liked"
+          element={<MiddlePart type="liked_page" />}
+          key={Date.now()}
+        />
 
         <Route
           path="*"
-          element={<h1 style={{ color: "white" }}>Not Found</h1>}
+          element={
+            <h1 style={{ color: "white", margintop: "10vh" }}>Not Found</h1>
+          }
         />
       </Routes>
     </>

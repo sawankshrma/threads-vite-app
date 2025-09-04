@@ -21,7 +21,7 @@ const style1 = {
   border: "solid 1px rgba(51, 51, 51, 1)",
 };
 
-export function ProfileComponent({ following, setUserInfo, userInfo }) {
+export function ProfileComponent({ following, myProfile, userInfo }) {
   const [profileUrl, setProfileUrl] = useState(profileImg);
   const { setCreateButtonOn, userName, setMessageName, setShowMessage } =
     useContext(GlobalContext);
@@ -195,26 +195,28 @@ export function ProfileComponent({ following, setUserInfo, userInfo }) {
             </div>
           </div>
 
-          <button
-            style={{
-              backgroundColor: "#090c0dff",
-              color: "white",
-              border: "1px solid #333",
-              borderRadius: "7px",
-              fontSize: "14.5px",
-              fontWeight: "bold",
-              cursor: "pointer",
-              userSelect: "none",
-              outline: "none",
-              padding: "10px 10px 10px 10px",
-              height: "40px",
-              width: "auto",
-              marginTop: "-15px",
-            }}
-            onClick={followHim}
-          >
-            {amIfollowing ? "Unfollow" : "Follow"}
-          </button>
+          {!myProfile && (
+            <button
+              style={{
+                backgroundColor: "#090c0dff",
+                color: "white",
+                border: "1px solid #333",
+                borderRadius: "7px",
+                fontSize: "14.5px",
+                fontWeight: "bold",
+                cursor: "pointer",
+                userSelect: "none",
+                outline: "none",
+                padding: "10px 10px 10px 10px",
+                height: "40px",
+                width: "auto",
+                marginTop: "-15px",
+              }}
+              onClick={followHim}
+            >
+              {amIfollowing ? "Unfollow" : "Follow"}
+            </button>
+          )}
         </div>
       </div>
     </div>

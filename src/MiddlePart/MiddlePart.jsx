@@ -93,7 +93,7 @@ export function MiddlePart({ type }) {
   }, []);
 
   useEffect(() => {
-    if (userName) {
+    if (userName && type == "profile_page") {
       console.log(userName);
       fetch_this_user();
       async function fetch_this_user() {
@@ -153,7 +153,11 @@ export function MiddlePart({ type }) {
       ) : null}
 
       {type == "profile_page" ? (
-        <ProfileComponent following={following} userInfo={userInfo} />
+        <ProfileComponent
+          following={following}
+          myProfile={myProfile}
+          userInfo={userInfo}
+        />
       ) : null}
 
       <div
@@ -185,8 +189,28 @@ export function MiddlePart({ type }) {
             <h2>All Posts:</h2>
           </div>
         ) : null}
+        {type == "liked_page" ? (
+          <div
+            style={{
+              width: "99%",
+              height: "auto",
+              backgroundColor: "black",
+              borderTop: "solid 1px white",
+              borderRadius: "100px",
+              color: "white ",
+              padding: "0px",
+              textAlign: "center",
+              // marginLeft: "50px",
+              fontFamily: "Sans-serif",
+              // backgroundColor: "Green",
+            }}
+          >
+            <h1>Liked Posts:</h1>
+          </div>
+        ) : null}
 
         <Posts
+          userName={userName}
           following={following}
           setFollowing={setFollowing}
           loading={loading}
@@ -210,6 +234,7 @@ function Posts({
   setLoading,
   profile_userName,
   type,
+  userName,
   setFollowing,
 }) {
   const [posts, setPosts] = useState([]);
@@ -247,6 +272,15 @@ function Posts({
         if (type === "profile_page") {
           finalPosts = mappedPosts.filter(
             (post) => post.name === profile_userName
+          );
+        }
+        if (type === "liked_page") {
+          function like_isOn(arr, userName) {
+            return arr.includes(String(userName));
+          }
+
+          finalPosts = mappedPosts.filter((post) =>
+            like_isOn(post.liked_users, userName)
           );
         }
 

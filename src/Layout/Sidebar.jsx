@@ -56,12 +56,14 @@ export function Sidebar() {
       </div>
 
       {/* Heart */}
-      <Heart
-        className="text-gray-500 w-6 h-6 options"
-        color="white"
-        size={32}
-        strokeWidth={1.5}
-      />
+      <Link to={"/liked"}>
+        <Heart
+          className="text-gray-500 w-6 h-6 options"
+          color="white"
+          size={32}
+          strokeWidth={1.5}
+        />
+      </Link>
 
       {/* User */}
       <Link to={`/u/${userName}`}>
