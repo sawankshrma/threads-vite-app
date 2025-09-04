@@ -22,15 +22,12 @@ export default defineConfig({
     },
     proxy: {
       "/api": {
-        target: "http://localhost:8001/",
+        target: "http://74.225.203.152:8001/",
         changeOrigin: true,
         secure: false,
       },
     },
-    allowedHosts: [
-      "https://35461e231d364d2f4b5ebdd41e93ddfc.serveo.net",
-      "ebf67a73233a7aec77610636841d8326.serveo.net",
-    ],
+    allowedHosts: ["x.sharmaji.space", "sharmaji.space"],
     host: true,
     port: 5173,
   },
