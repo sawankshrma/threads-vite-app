@@ -37,6 +37,7 @@
   }
 }
 
-a:hover {
-  opacity: 50%;
+.profile-pic:hover,
+.user:hover {
+  opacity: 70%;
 }

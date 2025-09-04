@@ -122,7 +122,7 @@ export function PostComponent({
             }}
           >
             <Link to={`/u/${name}`}>
-              <b>{name} </b>
+              <b className="user">{name} </b>
             </Link>
             <span className="ago">{timed}</span>
           </div>
