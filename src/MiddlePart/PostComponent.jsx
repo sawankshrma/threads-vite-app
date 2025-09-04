@@ -28,7 +28,7 @@ export function PostComponent({
   liked_users,
 }) {
   // console.log(timeAgo(time, Date.now()));
-  const { userName } = useContext(GlobalContext);
+  const { userName, setImgURL, setShowImg } = useContext(GlobalContext);
   const timed = timeAgo(time);
   const likeRef = useRef(null);
   const [profileUrl, setProfileUrl] = useState({ profileImg });
@@ -141,7 +141,15 @@ export function PostComponent({
           {bodyOfPost}
         </div>
         {image !== "" && image !== undefined ? (
-          <img src={image} alt="xyz" className="post-image" />
+          <img
+            src={image}
+            alt="xyz"
+            className="post-image"
+            onClick={() => {
+              setImgURL(image);
+              setShowImg(true);
+            }}
+          />
         ) : null}
         <Button
           style={{ alignSelf: "center" }}

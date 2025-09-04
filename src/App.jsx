@@ -1,6 +1,7 @@
 import { MiddlePart } from "./MiddlePart/MiddlePart";
 import { Sidebar } from "./Layout/Sidebar";
 import { CreateDiv } from "./Layout/CreateDiv";
+import { ShowImage } from "./Layout/ShowImage";
 import { LoadingScreen } from "./Layout/LoadingScreen";
 import { Logo, CreateButton } from "./Layout/Logo";
 import { Message } from "./Layout/Message";
@@ -27,6 +28,8 @@ function GlobalContextProvider({ children }) {
   const [userProfilePic, setUserProfilePic] = useState("");
   const [messageName, setMessageName] = useState("");
   const [showMessage, setShowMessage] = useState(false);
+  const [showImg, setShowImg] = useState(false);
+  const [imgURL, setImgURL] = useState(null);
 
   return (
     <GlobalContext.Provider
@@ -43,6 +46,10 @@ function GlobalContextProvider({ children }) {
         setShowMessage,
         messageName,
         setMessageName,
+        showImg,
+        setShowImg,
+        imgURL,
+        setImgURL,
       }}
     >
       {children}
@@ -61,6 +68,7 @@ function AppRoutes() {
       <Message />
       <CreateDiv />
       <LoadingScreen />
+      <ShowImage />
       <Routes key={location.pathname}>
         <Route
           path="/"
