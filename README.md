@@ -1,14 +1,37 @@
-# React + Vite
+## Backend Repo- https://github.com/sawankshrma/threads-X (django)
 
-Backend- https://github.com/sawankshrma/threads-X
+## Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a twitter/threads like application made with React.
 
-Currently, two official plugins are available:
+### Deployment
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- It's currently deployed on an MS Azure VM @ https://x.sharmaji.space/
+  Right now it's still running in dev mode (`npm run dev` ) and the `vite.config.js` file describes how it's connected to the backend django process running on the same VM.
 
-## Expanding the ESLint configuration
+- It uses the local `sqlite` database in the VM (for now)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Tech Stack
+
+- React.js
+- Django
+- sqlite
+- JavaScript
+
+
+### Demo Screenshots
+
+
+
+| 🏠 Home Page             | 📱 Mobile Responsivenes          |
+| ------------------------------ | -------------------------------- |
+| ![](assets/homepage.png) | ![](assets/mobileresponsive.png) |
+
+| 🔑 Authentication             | ✍️ Creating a Post            |
+| ------------------------ | ----------------------------- |
+| ![](assets/authentication.png) | ![](assets/creatingapost.png) |
+
+
+```
+ More Update Soon... (Do check it out at https://x.sharmaji.space/)
+```
