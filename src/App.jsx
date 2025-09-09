@@ -30,6 +30,7 @@ function GlobalContextProvider({ children }) {
   const [showMessage, setShowMessage] = useState(false);
   const [showImg, setShowImg] = useState(false);
   const [imgURL, setImgURL] = useState(null);
+  const [csrftoken, setCsrftoken] = useState(null);
 
   return (
     <GlobalContext.Provider
@@ -50,6 +51,8 @@ function GlobalContextProvider({ children }) {
         setShowImg,
         imgURL,
         setImgURL,
+        csrftoken,
+        setCsrftoken,
       }}
     >
       {children}

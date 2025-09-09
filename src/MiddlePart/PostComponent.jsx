@@ -28,7 +28,8 @@ export function PostComponent({
   liked_users,
 }) {
   // console.log(timeAgo(time, Date.now()));
-  const { userName, setImgURL, setShowImg } = useContext(GlobalContext);
+  const { userName, setImgURL, setShowImg, csrftoken } =
+    useContext(GlobalContext);
   const timed = timeAgo(time);
   const likeRef = useRef(null);
   const [profileUrl, setProfileUrl] = useState({ profileImg });
@@ -77,7 +78,10 @@ export function PostComponent({
         setLikeIsOn(false);
         const response = await fetch(`/api/post/${id}`, {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrftoken,
+          },
           body: JSON.stringify({ to_like: false }),
           credentials: "include", // TODO: remove
         });
@@ -89,7 +93,10 @@ export function PostComponent({
         setLikeIsOn(true);
         const response = await fetch(`/api/post/${id}`, {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrftoken,
+          },
           body: JSON.stringify({ to_like: true }),
           credentials: "include", // TODO: remove
         });

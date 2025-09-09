@@ -20,6 +20,7 @@ export function CreateDiv() {
     setLoading,
     userName,
     userProfilePic,
+    csrftoken,
     setShowMessage,
     setMessageName,
   } = useContext(GlobalContext);
@@ -71,6 +72,7 @@ export function CreateDiv() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken,
       },
       credentials: "include", //TODO: remove
       body: JSON.stringify({
